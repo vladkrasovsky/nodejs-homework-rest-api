@@ -18,6 +18,13 @@ router.post('/login', validateBody(schemas.loginSchema), ctrl.loginUser)
 
 router.get('/current', authenticate, ctrl.getCurrentUser)
 
+router.patch(
+  '/',
+  authenticate,
+  validateBody(schemas.updateSubscriptionSchema),
+  ctrl.updateUserSubscription
+)
+
 router.post('/logout', authenticate, ctrl.logoutUser)
 
 module.exports = router
