@@ -2,7 +2,7 @@ const express = require('express')
 
 const { users: ctrl } = require('../../controllers')
 
-const { validateBody } = require('../../middlewares')
+const { authenticate, validateBody } = require('../../middlewares')
 
 const { schemas } = require('../../models/user')
 
@@ -15,5 +15,7 @@ router.post(
 )
 
 router.post('/login', validateBody(schemas.loginSchema), ctrl.loginUser)
+
+router.post('/logout', authenticate, ctrl.logoutUser)
 
 module.exports = router
