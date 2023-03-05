@@ -4,7 +4,14 @@ const getAllContacts = async (req, res) => {
   const { _id: owner } = req.user
   const { skip, limit } = req.pagination
 
-  const result = await Contact.find({ owner }, '-createdAt -updatedAt', {
+  const match = { owner }
+  const filters = req.query
+
+  if (filters.favorite) {
+    match.favorite = filters.favorite === 'true'
+  }
+
+  const result = await Contact.find(match, '-createdAt -updatedAt', {
     skip,
     limit,
   }).populate('owner', 'email subscription')
