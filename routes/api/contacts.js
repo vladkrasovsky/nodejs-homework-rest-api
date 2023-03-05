@@ -2,13 +2,18 @@ const express = require('express')
 
 const { contacts: ctrl } = require('../../controllers')
 
-const { authenticate, validateBody, isValidId } = require('../../middlewares')
+const {
+  authenticate,
+  validateBody,
+  isValidId,
+  pagination,
+} = require('../../middlewares')
 
 const { schemas } = require('../../models/contact')
 
 const router = express.Router()
 
-router.get('/', authenticate, ctrl.getAllContacts)
+router.get('/', authenticate, pagination, ctrl.getAllContacts)
 
 router.get('/:id', authenticate, isValidId, ctrl.getContactById)
 
