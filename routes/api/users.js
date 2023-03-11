@@ -2,7 +2,12 @@ const express = require('express')
 
 const { users: ctrl } = require('../../controllers')
 
-const { authenticate, validateBody } = require('../../middlewares')
+const {
+  authenticate,
+  upload,
+  validateBody,
+  validateUserAvatar,
+} = require('../../middlewares')
 
 const { schemas } = require('../../models/user')
 
@@ -23,6 +28,14 @@ router.patch(
   authenticate,
   validateBody(schemas.updateSubscriptionSchema),
   ctrl.updateUserSubscription
+)
+
+router.patch(
+  '/avatars',
+  authenticate,
+  upload.single('avatar'),
+  validateUserAvatar,
+  ctrl.updateUserAvatar
 )
 
 router.post('/logout', authenticate, ctrl.logoutUser)
