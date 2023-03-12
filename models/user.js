@@ -18,13 +18,19 @@ const userSchema = new Schema(
       unique: true,
       required: [true, 'Email is required'],
     },
+    avatarURL: {
+      type: String,
+      required: true,
+    },
     subscription: {
       type: String,
       enum: subscriptionList,
       default: 'starter',
     },
-    token: String,
-    default: '',
+    token: {
+      type: String,
+      default: '',
+    },
   },
   {
     versionKey: false,
