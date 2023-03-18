@@ -21,6 +21,8 @@ router.post(
 
 router.post('/login', validateBody(schemas.loginSchema), ctrl.loginUser)
 
+router.get('/verify/:verificationToken', ctrl.verifyUser)
+
 router.get('/current', authenticate, ctrl.getCurrentUser)
 
 router.patch(
