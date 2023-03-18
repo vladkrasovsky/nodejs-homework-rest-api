@@ -19,7 +19,6 @@ sgMail.setApiKey(SENDGRID_API_KEY)
 const sendEmail = async msg => {
   const email = { ...msg, from: SENDGRID_SENDER_EMAIL }
   await sgMail.send(email)
-  console.log(msg)
   return true
 }
 
